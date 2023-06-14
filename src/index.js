@@ -80,7 +80,6 @@ loadMoreBtn.addEventListener('click', () => {
         Notiflix.Notify.failure('Sorry, there are no more images.');
         loadMoreBtn.style.display = 'none';
       } else {
-        Notiflix.Notify.success(`Loaded ${data.hits.length} more images.`);
         data.hits.forEach(element => {
           const photoCard = document.createElement('div');
           photoCard.className = 'photo-card';

@@ -13,12 +13,13 @@ const lightbox = new SimpleLightbox('.gallery a');
 
 let page = 1;
 
-function search(event) {
+async function search(event) {
+  page = 1
   event.preventDefault();
   const url = `https://pixabay.com/api/?key=${API_KEY}&q=${input.value}&image_type=photo&page=${page}&per_page=40`;
   elem.innerHTML = '';
 
-  axios.get(url)
+ await axios.get(url)
     .then(response => {
       const data = response.data;
       console.log(data.hits);
@@ -56,7 +57,7 @@ function search(event) {
         loadMoreBtn.style.display = 'block';
 
         lightbox.refresh();
-        page ++;
+        
       }
     })
     .catch(error => {
@@ -68,6 +69,7 @@ searchBtn.addEventListener('click', search);
 
 
 loadMoreBtn.addEventListener('click', () => {
+  page++;
   const url = `https://pixabay.com/api/?key=${API_KEY}&q=${input.value}&image_type=photo&page=${page}&per_page=40`;
 
   axios.get(url)
@@ -104,7 +106,7 @@ loadMoreBtn.addEventListener('click', () => {
           `;
           elem.appendChild(photoCard);
         });
-        page++;
+        
        
         lightbox.refresh();
       }
